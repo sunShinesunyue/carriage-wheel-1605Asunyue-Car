@@ -38,7 +38,7 @@ const state = {
 
 const mutations = {
     updateList(state,payload) {
-        state[payload.index].src = payload.src
+        state.list[payload.index].src = payload.src
     }
 }
 

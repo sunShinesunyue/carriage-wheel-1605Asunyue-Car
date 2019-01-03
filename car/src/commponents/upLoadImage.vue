@@ -46,7 +46,6 @@
                 return add;
             }
         },
-
         // 方法
         methods:{
             // 将方法弄出来
@@ -63,24 +62,38 @@
                this.showMask= false;
             },
             // 拍照，相册
-            upLoad(type) {
-                uploadImg(type).then(res => {
-                    if(res.code == 0) {
-                        let src = '';
-                        if(/picture.eclicks.cn/.test(res.data.image01)) {
-                             src = res.data.image01.replace('http://', '//');
-                        } else {
-                             src = '//picture.eclicks.cn/' + res.data.image01;
-                        }
+            // upLoad(type) {
+            //     uploadImg(type).then(res => {
+            //         if(res.code == 0) {
+            //             let src = '';
+            //             if(/picture.eclicks.cn/.test(res.data.image01)) {
+            //                  src = res.data.image01.replace('http://', '//');
+            //             } else {
+            //                  src = '//picture.eclicks.cn/' + res.data.image01;
+            //             }
 
-                        this.updataList({
-                            src,
-                             index: this.list.findIndex(item=>item==this.current)
-                        })
-                    } else {
-                        alert(res.msg)
-                    }
-                })
+            //             this.updataList({
+            //                 src,
+            //                  index: this.list.findIndex(item=>item==this.current)
+            //             })
+            //         } else {
+            //             alert(res.msg)
+            //         }
+            //     })
+            // }
+
+            async upLoad(type) {
+                let res = await uploadImg(type);
+                if(res.result == 1) {
+                    this.updataList({
+                        src:res.data.url,
+                        index:this.list.findIndex(item=>item==this.current)
+                    })
+                    this.showMask = false;
+                } else {
+                    alert('上传图片失败');
+                }
+                console.log('res',res)
             }
         }
     }

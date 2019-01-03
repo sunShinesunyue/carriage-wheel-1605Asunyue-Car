@@ -9,5 +9,6 @@
       "libraryDirectory": "es",
       "style": true
     }]
-  ]
+  ],
+  "plugins" : ["transform-runtime"]
 }
