@@ -19,46 +19,6 @@
 
     <div class='IdCard'>
         <UpLoadImage />
-        <!-- <div class='IdCardChild'>
-          <p class='IdCar'>
-            <van-uploader :after-read="onRead"  class='IdCardCircule'>
-                        +
-            </van-uploader>
-          </p>  
-            <span class='IdFace'>身份证正面</span>
-        </div> -->
-        <!-- <div class='IdCardChild'>
-          <p class='IdCar'>
-            <van-uploader :after-read="onRead"  class='IdCardCircule'>
-                        +
-            </van-uploader>
-          </p>  
-            <span  class='IdFace'>身份证反面</span>
-        </div> -->
-        <!-- <div class='IdCardChild'>
-          <p class='IdCar'>
-            <van-uploader :after-read="onRead"  class='IdCardCircule'>
-                        +
-            </van-uploader>
-          </p>  
-            <span  class='IdFace'>驾驶证正页</span>
-        </div> -->
-        <!-- <div class='IdCardChild'>
-            <p class='IdCar'>
-              <van-uploader :after-read="onRead"  class='IdCardCircule'>
-                          +
-              </van-uploader>
-            </p>  
-            <span  class='IdFace'>身份证副页</span>
-        </div> -->
-        <!-- <div class='IdCardChild'>
-            <p class='IdCar'>
-              <van-uploader :after-read="onRead"  class='IdCardCircule'>
-                          +
-              </van-uploader>
-            </p>  
-            <span  class='IdFace'>白底半身照</span>
-        </div> -->
     </div>
 
     <div class='lists'>
@@ -68,20 +28,18 @@
       </div>
       <div>
         <p>当前驾照签发城市</p>
-        <input placeholder='请选择签发地'/>
+        <input placeholder='请选择签发地' @click='nowCity'/>
       </div>
+
       <div>
         <p>可补换的签发城市</p>
-        <input placeholder='请选择签发地'/>
+        <input placeholder='请选择签发地' @click='oldCity'/>
       </div>
       <div class='line'>
         <span>服务费</span>
         <span class='price'>￥399</span>
       </div>
     </div>
-      <van-popup v-model="show" position="bottom" :overlay="false" class='bottomMask'>
-            内容
-      </van-popup>
     <div class='last'>
         <span>优惠</span>
         <span>></span>
@@ -91,6 +49,31 @@
       <p>实付: <span>￥399</span></p>
       <button>立即支付</button>
     </footer>
+      <!-- 当前驾照签发城市 弹出层 -->
+      <van-popup v-model="show" position="bottom" :overlay="false" class='nowCityMask'>
+            <h3 class='nowCityMaskHead'>
+              <span></span>
+              <span>当前签发城市</span>
+              <span class='sure' @click='sureClick'>确定</span>
+            </h3>
+            <!-- 弹出层内部的Picker 选择器 -->
+          
+                <van-picker :columns="columns" @change="onChange" />
+     
+      </van-popup>
+
+            <!-- 可补换的签发城市 弹出层 -->
+      <!-- <van-popup v-model="show" position="bottom" :overlay="false" class='nowCityMask'>
+            <h3 class='nowCityMaskHead'>
+              <span></span>
+              <span>可补换城市</span>
+              <span class='sure' @click='sureClick'>确定</span>
+            </h3> -->
+            <!-- 弹出层内部的Picker 选择器 可补换的签发城市-->
+          
+                <!-- <van-picker :columns="columns" @change="onChange" /> -->
+<!--      
+      </van-popup> -->
   </div>
 </template>
 
@@ -108,7 +91,8 @@ export default {
     },
     data() {
     return {
-      show: false
+      show: false,
+      columns: ['杭州', '宁波', '温州', '嘉兴', '湖州']
     }
   },
   computed:{
@@ -139,7 +123,24 @@ export default {
 
     mask(){
       JSBridge.invoke('')
-    }
+    },
+
+    // 当前驾照签发城市 的 点击事件
+    nowCity() {
+        this.show = true; // 让底部弹出来
+    },
+    // 弹出层里面的的事件
+    onChange() {
+      // console.log('lllll')
+    },
+    // 点击事件
+    sureClick() {
+        this.show = false; // 让底部隐藏
+    },
+    // 可补换的签发城市
+    // oldCity() {
+    //     this.show = true;
+    // }
   }
 }
 </script>
@@ -252,10 +253,27 @@ export default {
     text-align: center;
     color: #3aaffd;
   }
-  .bottomMask {
-    width:100%;
-    height:80%;
-    background:rgba(255,255,0,0.3);
+    // 弹出层的样式
+  .nowCityMask {
+    // width:100%;
+    height:4.8rem;
+    background:#EEEEEE;
+    .nowCityMaskHead {
+      padding:0 0.2rem;
+      width:100%;
+      height:1rem;
+      background: #F7F7F8;
+      border:0.02rem solid #D2D4D8;
+      display:flex;
+      align-items: center;
+      justify-content: space-between;
+      span{
+        color:#6A6F78;
+      }
+      .sure {
+        color:#1C9DED;
+      }
+    }
   }
   footer{
     position: fixed;
@@ -323,6 +341,7 @@ export default {
       font-size: 18px;
       margin-top: 10px;
   }
+
 </style>
 
 
