@@ -12,7 +12,7 @@
                 <div class='buttonFamily'>
                     <button @click='upLoad(1)'>拍照</button>
                     <button @click='upLoad(2)'>相册</button>
-                    <button @click="cancel">取消</button>
+                    <button @click="cancel">取消返回</button>
                 </div>
             </div>
         </ul>
