@@ -37,3 +37,12 @@ export let upLoadImg = (type) => {
     })
 }
 
+// 获取驾照签发城市
+export let cityList = () => {
+    return sendRequest('/api/ExchangeJiaZhao/cityList')
+}
+
+// 或缺可换补城市
+export let costList = (...params)=>{
+  return sendRequest(`/api/ExchangeJiaZhao/getCostList?order_type=${params.type}&city_id=${params.city_id}&province_id=${params.pro_id}`);
+}

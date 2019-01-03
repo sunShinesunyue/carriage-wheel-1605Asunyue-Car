@@ -24,16 +24,18 @@
     <div class='lists'>
       <div class='car_splice'>
         <p>服务类型</p>
-        <span @click="mask">换驾照<em>></em></span>
+        <span @click='nowCity' class='typeColor'>{{info.type}}<em>></em></span>
       </div>
       <div>
         <p>当前驾照签发城市</p>
-        <input placeholder='请选择签发地' @click='nowCity'/>
+        <!-- <input placeholder='请选择签发地' @click='localCity'/> -->
+        <span @click='localCity'>请选择签发地</span>
       </div>
 
       <div>
         <p>可补换的签发城市</p>
-        <input placeholder='请选择签发地'/>
+        <!-- <input placeholder='请选择签发地'/> -->
+        <span>请选择签发地</span>
       </div>
       <div class='line'>
         <span>服务费</span>
@@ -54,21 +56,15 @@
             <!-- 弹出层内部的Picker 选择器 -->
           
                 <van-picker :columns="typeArray" @cancel="onCancel" show-toolbar title="请选择服务类型" @confirm="onConfirm"/>
-     
-      </van-popup>
 
-            <!-- 可补换的签发城市 弹出层 -->
-      <!-- <van-popup v-model="show" position="bottom" :overlay="false" class='nowCityMask'>
-            <h3 class='nowCityMaskHead'>
-              <span></span>
-              <span>可补换城市</span>
-              <span class='sure' @click='sureClick'>确定</span>
-            </h3> -->
-            <!-- 弹出层内部的Picker 选择器 可补换的签发城市-->
-          
-                <!-- <van-picker :columns="columns" @change="onChange" /> -->
-<!--      
-      </van-popup> -->
+      </van-popup>
+      <div>
+          <van-popup v-model="showCity" position="bottom" :overlay="false">
+              
+                    <van-picker :columns="cityArray" @cancel="onCancelCity" show-toolbar title="当前签发城市" @change='changeCity' @confirm="onConfirmCity"/>
+
+          </van-popup>
+      </div>
   </div>
 </template>
 
@@ -79,6 +75,8 @@ import Vue from 'vue';
 
 import UpLoadImage from '@/commponents/upLoadImage'; // 引入上传图片的组件
 
+import {cityList, costList} from '@/api/index'; // 引入请求城市数据的两个方法
+
 export default {
   name: 'app',
     components: {
@@ -87,10 +85,23 @@ export default {
     data() {
     return {
       show: false,
+      showCity:false,
       columns: ['杭州', '宁波', '温州', '嘉兴', '湖州'],
       typeArray:["补驾照","换驾照"],
-      type:''
+      // 签发城市
+      cityList:[],
+      cityArray:[],
+      info: {
+        type:'考驾照',
+        city: [],
+        cityName:[]
+      }
+      
     }
+  },
+  // 生命周期里面请求数据
+  created() {
+      this.getCityList(); // 调用请求数据的方法  在生命周期里面
   },
   computed:{
     ...mapState({
@@ -105,6 +116,23 @@ export default {
   //   console.log(this.$store, 'this.$store')
   // },
   methods: {
+    // 请求数据的方法 异步请求数据
+    async getCityList() {
+        let res = await cityList();
+        res.data.forEach(item =>{
+          item.list.forEach(value=> {
+            delete value.list
+          })
+        })
+        // 赋值
+        this.cityList = res.data;
+
+        this.cityArray = [{
+          values: this.cityList.map(item =>item.name)
+        },{
+          values: this.cityList[0].list.map(item=>item.name)
+        }]
+    },
     ...mapMutations({
       changeNum: 'app/changeNum'
     }),
@@ -140,6 +168,21 @@ export default {
         console.log(value)
         this.type = value;
         this.onCancel(); // 确认完成之后取消
+    },
+    localCity() {
+      // console.log('llllll')
+      this.showCity = true;
+    },
+    onCancelCity() {
+      this.showCity = false;
+    },
+    changeCity (picker,values) {
+      let obj=this.cityList.filter(item=>item.name===values[0]);
+      picker.setColumnValues(1,obj[0].list.map(item=>item.name))
+    },
+    // 确认城市
+    onConfirmCity(value) {
+      this.cityName = value;
     }
   }
 }
@@ -247,6 +290,9 @@ export default {
         }
 
     }
+  }
+  .typeColor {
+    color:#3aaffd;
   }
   .txt{
     width: 100%;
