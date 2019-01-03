@@ -9,10 +9,11 @@
     <div class='swipe'>
       <!-- <img src='./assets/banner@3x.png'> -->
       <van-swipe :autoplay="2000" indicator-color="white">
-        <van-swipe-item>我是轮播图片</van-swipe-item>
-        <van-swipe-item>可是我出不来</van-swipe-item>
-        <van-swipe-item>3</van-swipe-item>
-        <van-swipe-item>4</van-swipe-item>
+        <van-swipe-item><img src='./assets/download.png'/></van-swipe-item>
+        <van-swipe-item><img src='./assets/download.png'/></van-swipe-item>
+        <van-swipe-item><img src='./assets/download2.png'/></van-swipe-item>
+        <van-swipe-item><img src='./assets/download.png'/></van-swipe-item>
+        <van-swipe-item><img src='./assets/download.png'/></van-swipe-item>
       </van-swipe>
     </div>
 
@@ -71,7 +72,7 @@
       </div>
       <div>
         <p>可补换的签发城市</p>
-        <input placeholder='请选择签发地' @click='changeCity()' />
+        <input placeholder='请选择签发地'/>
       </div>
       <div class='line'>
         <span>服务费</span>
@@ -147,11 +148,6 @@ export default {
 
     mask(){
       JSBridge.invoke('')
-    },
-    changeCity() {
-      // <van-popup v-model="show">内容</van-popup>
-      console.log('lllllll')
-      this.show=!this.show
     }
   }
 }
