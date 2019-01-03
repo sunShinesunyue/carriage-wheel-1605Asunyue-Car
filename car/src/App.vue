@@ -33,7 +33,7 @@
 
       <div>
         <p>可补换的签发城市</p>
-        <input placeholder='请选择签发地' @click='oldCity'/>
+        <input placeholder='请选择签发地'/>
       </div>
       <div class='line'>
         <span>服务费</span>
@@ -51,14 +51,9 @@
     </footer>
       <!-- 当前驾照签发城市 弹出层 -->
       <van-popup v-model="show" position="bottom" :overlay="false" class='nowCityMask'>
-            <h3 class='nowCityMaskHead'>
-              <span></span>
-              <span>当前签发城市</span>
-              <span class='sure' @click='sureClick'>确定</span>
-            </h3>
             <!-- 弹出层内部的Picker 选择器 -->
           
-                <van-picker :columns="columns" @change="onChange" />
+                <van-picker :columns="typeArray" @cancel="onCancel" show-toolbar title="请选择服务类型" @confirm="onConfirm"/>
      
       </van-popup>
 
@@ -92,7 +87,9 @@ export default {
     data() {
     return {
       show: false,
-      columns: ['杭州', '宁波', '温州', '嘉兴', '湖州']
+      columns: ['杭州', '宁波', '温州', '嘉兴', '湖州'],
+      typeArray:["补驾照","换驾照"],
+      type:''
     }
   },
   computed:{
@@ -129,18 +126,21 @@ export default {
     nowCity() {
         this.show = true; // 让底部弹出来
     },
-    // 弹出层里面的的事件
-    onChange() {
-      // console.log('lllll')
-    },
     // 点击事件
-    sureClick() {
+    cancelClick() {
         this.show = false; // 让底部隐藏
     },
-    // 可补换的签发城市
-    // oldCity() {
-    //     this.show = true;
-    // }
+    sureClick() {
+      console.log('确认')
+    },
+    onCancel() {
+      this.show = false;
+    },
+    onConfirm(value) {
+        console.log(value)
+        this.type = value;
+        this.onCancel(); // 确认完成之后取消
+    }
   }
 }
 </script>
@@ -258,22 +258,7 @@ export default {
     // width:100%;
     height:4.8rem;
     background:#EEEEEE;
-    .nowCityMaskHead {
-      padding:0 0.2rem;
-      width:100%;
-      height:1rem;
-      background: #F7F7F8;
-      border:0.02rem solid #D2D4D8;
-      display:flex;
-      align-items: center;
-      justify-content: space-between;
-      span{
-        color:#6A6F78;
-      }
-      .sure {
-        color:#1C9DED;
-      }
-    }
+
   }
   footer{
     position: fixed;
