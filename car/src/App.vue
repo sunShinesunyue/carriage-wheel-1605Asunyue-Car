@@ -183,6 +183,7 @@ export default {
     // 确认城市
     onConfirmCity(value) {
       this.cityName = value;
+      console.log(this.cityName)
     }
   }
 }
