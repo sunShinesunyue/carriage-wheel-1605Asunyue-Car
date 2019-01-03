@@ -99,16 +99,7 @@ import {mapState, mapGetters, mapMutations, mapActions } from 'vuex';
 
 import Vue from 'vue';
 
-import { Swipe, SwipeItem ,Uploader,Popup} from 'vant'; // 引入vant的插件
-
 import UpLoadImage from '@/commponents/upLoadImage'; // 引入上传图片的组件
-
-Vue.use(Swipe).use(SwipeItem); // 挂载
-
-Vue.use(Uploader);
-
-Vue.use(Popup);
-
 
 export default {
   name: 'app',
