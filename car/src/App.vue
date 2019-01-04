@@ -29,7 +29,7 @@
       <div>
         <p>当前驾照签发城市</p>
         <!-- <input placeholder='请选择签发地' @click='localCity'/> -->
-        <span @click='localCity'>请选择签发地</span>
+        <span @click='localCity'>{{info.cityName[0]}} {{info.cityName[1]}}</span>
       </div>
 
       <div>
@@ -58,6 +58,8 @@
                 <van-picker :columns="typeArray" @cancel="onCancel" show-toolbar title="请选择服务类型" @confirm="onConfirm"/>
 
       </van-popup>
+
+      <!-- 签发城市 -->
       <div>
           <van-popup v-model="showCity" position="bottom" :overlay="false">
               
@@ -94,7 +96,7 @@ export default {
       info: {
         type:'考驾照',
         city: [],
-        cityName:[]
+        cityName:['北京朝阳']
       }
       
     }
@@ -142,7 +144,6 @@ export default {
     changeNum(type){
       this.changeNumAsync(type).then(res => {
         console.log(type, 'type')
-         console.log('异步操作完成')
       })
     },
     mask(){
@@ -164,12 +165,11 @@ export default {
       this.show = false;
     },
     onConfirm(value) {
-        console.log(value)
-        this.type = value;
+        console.log('正在打印驾照的值----',value)
+        this.info.type = value;
         this.onCancel(); // 确认完成之后取消
     },
     localCity() {
-      // console.log('llllll')
       this.showCity = true;
     },
     onCancelCity() {
@@ -181,8 +181,9 @@ export default {
     },
     // 确认城市
     onConfirmCity(value) {
-      this.cityName = value;
-      console.log(this.cityName)
+      this.info.cityName = value;
+      console.log('正在打印渲染出城市的名字',this.cityName)
+      this.showCity = false;
     }
   }
 }
