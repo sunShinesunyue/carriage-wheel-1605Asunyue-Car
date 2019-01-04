@@ -145,7 +145,6 @@ export default {
          console.log('异步操作完成')
       })
     },
-
     mask(){
       JSBridge.invoke('')
     },
