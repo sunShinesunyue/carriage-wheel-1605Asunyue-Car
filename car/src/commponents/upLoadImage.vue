@@ -91,7 +91,7 @@
                     })
                     this.showMask = false;
                 } else {
-                    alert('上传图片失败');
+                    alert('上传图片失败了，失败了');
                 }
                 console.log('res',res)
             }
