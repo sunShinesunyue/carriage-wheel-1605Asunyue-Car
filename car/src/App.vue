@@ -29,7 +29,7 @@
       <div>
         <p>当前驾照签发城市</p>
         <!-- <input placeholder='请选择签发地' @click='localCity'/> -->
-        <span @click='localCity'>{{info.cityName[0]}} {{info.cityName[1]}}</span>
+        <span @click='localCity' class='cityStyle'>{{info.cityName[0]}} {{info.cityName[1]}}</span>
       </div>
 
       <div>
@@ -372,6 +372,9 @@ export default {
       padding-right: 10px;
       font-size: 18px;
       margin-top: 10px;
+  }
+  .cityStyle{
+    color:chocolate;
   }
 
 </style>
