@@ -2,15 +2,16 @@
     <div class='carWheel'>
 
         <div class="carWheelHeader">
-            <a href="/chelun/order">订单提交</a>
-            <a href="/chelun/address">填写收货地址</a>
-            <a href="/chelun/solve">正在办理</a>
-            <a href="/chelun/success">办理完成</a>
+            <span @click="clickEvent('0')">订单提交</span>
+            <span @click="clickEvent('1')">填写收获地址</span>
+            <span @click="clickEvent('2')">正在办理</span>
+            <span @click="clickEvent('3')">办理完成</span>
         </div>
 
         <div class="carWheelContent">
                 <div class="carWheelAdress">
                         收获地址
+                        {{clickValue}}
                 </div>
 
                 <div class="carWheelInfo">
@@ -20,15 +21,34 @@
                         <p>联系人</p>
                 </div>
         </div>
+        
 
         <div class="carWheelFooter">
                 确认
         </div>
-
+ 
     </div>
 </template>
 <script>
+    // 将所有组件引过来
+    import OrderPage from '@/commponents/tabModule/order.vue';
 
+    export default {
+        components: {
+            OrderPage
+        },
+        data() {
+            return {
+                clickValue:0
+            }
+        },
+
+        methods: {
+            clickEvent(index) {
+                this.clickValue = index;
+            }
+        }
+    }
 </script>
 
 <style lang='scss' scoped> 
@@ -45,7 +65,7 @@
     // 头部
     .carWheelHeader {
         width:100%;
-        height:0.72rem;
+        height:0.92rem;
         background: #fff;
         display:-webkit-flex;
         display:flex;
@@ -53,7 +73,7 @@
         align-items:center;
         -webkit-justify-content:space-between;
         justify-content:space-between;
-        a{
+        span{
         color:#3AAFFD;
         }
     }
