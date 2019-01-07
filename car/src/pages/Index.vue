@@ -1,13 +1,13 @@
 <template>
     <div>
-        <router-view>
-            首页页面
-        </router-view>
+        1111
     </div>
 </template>
 
 <script>
-
+    export default {
+        
+    }
 </script>
 
 <style lang='scss'>

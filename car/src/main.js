@@ -16,6 +16,9 @@ Vue.use(Picker); // Picker 选择器
 // 引入公共样式
 import './scss/public.css'
 
+
+
+
 new Vue({
   el: '#app',
   router,
