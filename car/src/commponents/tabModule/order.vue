@@ -1,6 +1,12 @@
 <template>
     <div>
-        我是  订单  页面
+        <div class="carWheelAdress">
+                       订单页面
+        </div>
+
+        <div class="carWheelInfo">
+           
+        </div>
     </div>
 </template>
 <script>

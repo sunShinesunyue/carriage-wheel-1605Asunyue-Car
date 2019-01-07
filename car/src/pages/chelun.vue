@@ -2,24 +2,14 @@
     <div class='carWheel'>
 
         <div class="carWheelHeader">
-            <span @click="clickEvent('0')">订单提交</span>
-            <span @click="clickEvent('1')">填写收获地址</span>
-            <span @click="clickEvent('2')">正在办理</span>
-            <span @click="clickEvent('3')">办理完成</span>
+            <span @click="clickEvent('OrderPage')" class='v-if="clickValue===OrderPage"?"tabColor": "" '>订单提交</span>
+            <span @click="clickEvent('Address')" class='v-if="clickValue===Address"?"tabColor"": "" '>填写收获地址</span>
+            <span @click="clickEvent('Solve')" class='v-if="clickValue===Solve"?"tabColor"": "" '>正在办理</span>
+            <span @click="clickEvent('Success')" class='v-if="clickValue===Success"?"tabColor": "" '>办理完成</span>
         </div>
 
         <div class="carWheelContent">
-                <div class="carWheelAdress">
-                        收获地址
-                        {{clickValue}}
-                </div>
-
-                <div class="carWheelInfo">
-                        <p>联系省市</p>
-                        <p>详细地址</p>
-                        <p>联系电话</p>
-                        <p>联系人</p>
-                </div>
+                <OrderPage :is="clickValue" keep-alive></OrderPage>
         </div>
         
 
@@ -30,16 +20,23 @@
     </div>
 </template>
 <script>
-    // 将所有组件引过来
+    // 将子组件引过来
     import OrderPage from '@/commponents/tabModule/order.vue';
+    import Address from '@/commponents/tabModule/address.vue';
+    import Solve from '@/commponents/tabModule/solve.vue';
+    import Success from '@/commponents/tabModule/success.vue';
 
     export default {
+        // 声明子组件
         components: {
-            OrderPage
+            OrderPage,
+            Address,
+            Solve,
+            Success
         },
         data() {
             return {
-                clickValue:0
+                clickValue:Address
             }
         },
 
@@ -81,26 +78,7 @@
         width:100%;
         -webkit-flex:1;
         flex:1;
-        // 收获地址
-        .carWheelAdress {
-            width:100%;
-            height:0.73rem;
-            background: #F4F4F4;
-            color:#818181;
-            text-align: center;
-        }
-        // 信息
-        .carWheelInfo {
-            width:100%;
-            height:auto;
-            background: #fff;
-            >p {
-                width:100%;
-                height:1.2rem;
-                line-height: 1.2rem;
-                border-bottom:1px solid #ccc;
-            }
-        }
+   
     }
     .carWheelFooter {
         width:100%;
@@ -109,5 +87,8 @@
         color:#fff;
         text-align: center;
         line-height:0.8rem;
+    }
+    .tabColor {
+        background:red;
     }
 </style>
