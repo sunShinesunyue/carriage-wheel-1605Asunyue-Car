@@ -36,7 +36,7 @@
         },
         data() {
             return {
-                clickValue:Address
+                clickValue:OrderPage
             }
         },
 
