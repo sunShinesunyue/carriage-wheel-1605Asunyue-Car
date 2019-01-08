@@ -37,6 +37,11 @@ export let upLoadImg = (type) => {
     })
 }
 
+// 唤起分享 分享一些图片 文章 到朋友圈
+export let doShare =() => {
+    JSBridge.invoke('ui','shareMessage')
+}
+
 // 获取驾照签发城市
 export let cityList = () => {
     return sendRequest('/api/ExchangeJiaZhao/cityList')
@@ -45,4 +50,4 @@ export let cityList = () => {
 // 或缺可换补城市
 export let costList = (...params)=>{
   return sendRequest(`/api/ExchangeJiaZhao/getCostList?order_type=${params.type}&city_id=${params.city_id}&province_id=${params.pro_id}`);
-}
+} 

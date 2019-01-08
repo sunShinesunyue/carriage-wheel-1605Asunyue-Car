@@ -2,7 +2,7 @@
  * @Author: sunyue
  * @Date: 2019-01-02 15:35:04 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-01-07 17:07:43
+ * @Last Modified time: 2019-01-08 16:42:06
  */
 /**
  * 1.配置路由页面
@@ -26,6 +26,10 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '*',
+      redirect:'/chelun'
+    },
     {
       path: '/index',
       component: App

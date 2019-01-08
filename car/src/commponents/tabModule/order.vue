@@ -10,6 +10,7 @@
     </div>
 </template>
 <script>
+    import {doShare} from '@/api/index'; // 引入
     export default {
         created() {
             window['CHELUN_SHARE_DATA_WXTIMELINE'] = {
@@ -28,7 +29,8 @@
         methods:{
             // 分享
             shareMy() {
-                console.log()
+                doShare() // 调用这个方法
+                console.log('分享成功')
             }
         }
     }
