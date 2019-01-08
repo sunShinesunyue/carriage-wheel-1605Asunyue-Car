@@ -42,5 +42,11 @@
             width:100%;
             background: #c0c0c0;
         }
+        // 多倍屏问题
+        @mixin scale($ratio) {
+            transform: scaleY($ratio)
+        }
+        // 2倍屏
+    
     }
 </style>
