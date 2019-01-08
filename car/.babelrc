@@ -10,5 +10,5 @@
       "style": true
     }]
   ],
-  "plugins" : ["transform-runtime"]
+  "plugins" : ["transform-runtime","syntax-dynamic-import"]
 }

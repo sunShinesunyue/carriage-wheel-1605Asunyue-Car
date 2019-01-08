@@ -1,9 +1,4 @@
-/*
- * @Author: sunyue
- * @Date: 2019-01-02 15:35:04 
- * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-01-08 16:42:06
- */
+
 /**
  * 1.配置路由页面
  * 2.需要下载vue-router
@@ -12,16 +7,24 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import HelloWorld from '@/pages/Index.vue';
-import WheelPage from '@/pages/wheel.vue';
-import App from '@/pages/app.vue';
-import Chelun from '@/pages/chelun.vue';  // 引入到切换页面
+
+// 被改成路由按需加载了 动态路由
+
+// import WheelPage from '@/pages/wheel.vue';
+// import App from '@/pages/app.vue';
+// import Chelun from '@/pages/chelun.vue';  // 引入到切换页面
+
+// 路由按需加载
+const WheelPage = () =>import('@/pages/Index.vue');
+const App = () =>import('@/pages/app.vue');
+const Chelun = () =>import('@/pages/chelun.vue');
+
 
 // 引入二级路由页面
 // import Order from '@/secondPage/order.vue'
 // import Address from '@/secondPage/address.vue'
 // import Solve from '@/secondPage/solve.vue'
-// import Success from '@/secondPage/success.vue'
-
+// import Success from '@/secondPage/success.vue' 
 Vue.use(Router)
 
 export default new Router({
