@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="carWheelAdress">
-                <button @click='shareMyIntersting'>点击分享</button>
+                <button @click='shareMy'>点击分享</button>
         </div>
 
         <div class="carWheelInfo">
@@ -26,8 +26,9 @@
             }
         },
         methods:{
+            // 分享
             shareMy() {
-                
+                console.log()
             }
         }
     }
