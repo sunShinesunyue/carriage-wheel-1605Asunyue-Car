@@ -72,6 +72,7 @@
         justify-content:space-between;
         span{
         color:#3AAFFD;
+        display:inline-block;
         }
     }
     .carWheelContent {

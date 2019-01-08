@@ -30,7 +30,17 @@
                 width:100%;
                 height:1.2rem;
                 line-height: 1.2rem;
-                border-bottom:1px solid #ccc;
+                position: relative;
             }
+            p::after {
+            content:'';
+            position:absolute;
+            bottom:0;
+            left:0;
+            display:inline-block;
+            height:1px;
+            width:100%;
+            background: #c0c0c0;
+        }
     }
 </style>
